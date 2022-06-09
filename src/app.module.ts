@@ -1,12 +1,13 @@
 import { Module } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
-import { RestraurantsModule } from './restraurants/restraurants.module';
+import { RestaurantsModule } from './restaurants/restaurants.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
 // import Joi from 'joi' <= 이렇게 쓰면 에러 발생
 import * as Joi from 'joi';
-import { Restaurant } from './restraurants/entities/restaurants.entity';
+import { Restaurant } from './restaurants/entities/restaurants.entity';
+import { RestaurantsService } from './restaurants/restaurants.service';
 console.log(process.cwd());
 
 @Module({
@@ -24,7 +25,7 @@ console.log(process.cwd());
         DB_NAME: Joi.string().required(),
       }),
     }),
-    RestraurantsModule,
+    RestaurantsModule,
     TypeOrmModule.forRoot({
       type: 'postgres',
       host: process.env.DB_HOST,
@@ -47,7 +48,7 @@ console.log(process.cwd());
 export class AppModule {}
 
 // #1.0 Apollo Server Setup
-// "Error: Apollo Server requires either an existing schema, modules or typeDefs"
+// "Error: Apollo Server requires eitheyyr an existing schema, modules or typeDefs"
 // serrano는 위 에러가 바로 발생하였지만, 나는 @nestjs/graphql의 버젼이 10 이상이었기 때문에,
 // driver 옵션을 명시하지 않는다면, 위 에러가 발생하기도 전에 driver 관련된 에러가 발생하게 된다.
 // @nestjs/apollo를 설치하고 ApolloDriver, ApolloDriverConfig를 import해서,
