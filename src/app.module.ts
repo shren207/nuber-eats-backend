@@ -6,6 +6,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
 // import Joi from 'joi' <= 이렇게 쓰면 에러 발생
 import * as Joi from 'joi';
+import { Restaurant } from './restraurants/entities/restaurants.entity';
 console.log(process.cwd());
 
 @Module({
@@ -31,8 +32,9 @@ console.log(process.cwd());
       username: process.env.DB_USERNAME,
       password: process.env.DB_PASSWORD,
       database: process.env.DB_NAME,
-      synchronize: true,
+      synchronize: process.env.NODE_ENV !== 'prod',
       logging: true,
+      entities: [Restaurant],
     }),
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
