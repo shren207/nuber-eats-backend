@@ -1,18 +1,28 @@
 import { Module } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
-import { join } from 'path';
 import { RestraurantsModule } from './restraurants/restraurants.module';
+import { TypeOrmModule } from '@nestjs/typeorm';
 
 console.log(process.cwd());
 
 @Module({
   imports: [
+    RestraurantsModule,
+    TypeOrmModule.forRoot({
+      type: 'postgres',
+      host: 'localhost',
+      port: 5432,
+      database: 'nuber-eats',
+      username: 'postgres',
+      password: 'postgres',
+      synchronize: true,
+      // logging: true,
+    }),
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
       autoSchemaFile: true,
     }),
-    RestraurantsModule,
   ],
   controllers: [],
   providers: [],
