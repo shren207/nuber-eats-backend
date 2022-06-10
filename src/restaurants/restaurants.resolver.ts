@@ -16,8 +16,10 @@ export class RestaurantsResolver {
   ): Promise<boolean> {
     try {
       await this.restaurantsService.createRestaurant(createRestaurantDto);
+      console.log(CreateRestaurantDto);
       return true;
     } catch (e) {
+      console.log('Error detected!!!');
       console.log(e);
       return false;
     }
