@@ -120,3 +120,4 @@ dist
 
 # intelliJ IDE configuration
 .idea!/.env.dev
+.idea

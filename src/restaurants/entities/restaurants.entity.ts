@@ -8,7 +8,7 @@ import { IsBoolean, IsOptional, IsString, Length } from 'class-validator';
 export class Restaurant {
   @Field((type) => Number)
   @PrimaryGeneratedColumn()
-  id: number;
+  id: number;  fdfd
 
   @Field((type) => String)
   @Column()
@@ -33,7 +33,7 @@ export class Restaurant {
   ownerName: string;
 
   @Field((type) => String)
-  @Column()
+  @Column()  
   @IsString()
   categoryName: string;
 }

@@ -3,6 +3,7 @@ import { Restaurant } from './entities/restaurants.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CreateRestaurantDto } from './dtos/create-restaurant.dto';
+import { UpdateRestaurantDto } from './dtos/update-restaurant.dto';
 
 @Injectable()
 export class RestaurantsService {
@@ -22,5 +23,8 @@ export class RestaurantsService {
     // 여기에 있는 restaurant는 그저 javascript에서만 존재하고, DB에 실제로 저장되어 있지는 않다.
     // DB에 저장하고 싶다면 save method를 사용해야 한다.
     return this.restaurantRepository.save(newRestaurant);
+  }
+  updateRestaurant({ id, data }: UpdateRestaurantDto) {
+    return this.restaurantRepository.update(id, { ...data });
   }
 }
