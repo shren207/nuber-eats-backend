@@ -17,4 +17,5 @@ export class UsersResolver {
 
   @Mutation((returns) => CreateAccountOutput)
   createAccount(@Args('input') createAccountInput: CreateAccountInput) {}
+  // @Args에 'input'이라고 argument를 준 것은, InputType을 사용하겠다는 convention이다.
 }
