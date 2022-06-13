@@ -8,6 +8,8 @@ import { UpdateRestaurantDto } from './dtos/update-restaurant.dto';
 @Injectable()
 export class RestaurantsService {
   constructor(
+    // Data Mapper 방식에서는, Service에 Repository를 주입해야 한다.
+    // 따라서 constructor에 @InjectRepository() 사용해서 repository를 생성해야 한다.
     @InjectRepository(Restaurant)
     private readonly restaurantRepository: Repository<Restaurant>,
   ) {}
