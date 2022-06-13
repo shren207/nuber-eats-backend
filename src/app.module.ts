@@ -8,7 +8,9 @@ import { ConfigModule } from '@nestjs/config';
 import * as Joi from 'joi';
 import { Restaurant } from './restaurants/entities/restaurants.entity';
 import { RestaurantsService } from './restaurants/restaurants.service';
-console.log(process.cwd());
+import { UsersModule } from './users/users.module';
+import { CommonModule } from './common/common.module';
+import { User } from './users/entities/user.entity';
 
 @Module({
   imports: [
@@ -25,7 +27,6 @@ console.log(process.cwd());
         DB_NAME: Joi.string().required(),
       }),
     }),
-    RestaurantsModule,
     TypeOrmModule.forRoot({
       type: 'postgres',
       host: process.env.DB_HOST,
@@ -35,12 +36,14 @@ console.log(process.cwd());
       database: process.env.DB_NAME,
       synchronize: process.env.NODE_ENV !== 'prod',
       logging: process.env.NODE_ENV !== 'prod',
-      entities: [Restaurant],
+      entities: [User],
     }),
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
       autoSchemaFile: true,
     }),
+    UsersModule,
+    CommonModule,
   ],
   controllers: [],
   providers: [],
